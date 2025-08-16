@@ -1,16 +1,21 @@
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Createnemy : MonoBehaviour
 {
+    public static List<Createnemy> allEnemies = new List<Createnemy>();
     public Transform Player;
-    public GameObject enemy;
+    public GameObject enemyPrefab;
     public float minDistance = 10f;
     public float maxDistance = 20f;
     public float width = 40f;
     public float height = 10f;
 
-    public int spawnCount = 10;
+    public int spawnCount;
+
+    [HideInInspector] public Renderer rend;
+    private Color originalColor;
 
     void EnemySpawns()
     {
@@ -29,12 +34,28 @@ public class Createnemy : MonoBehaviour
             Vector3 spawnPos = Player.position + Player.forward * distance + Player.right * offsetX + Player.up * offsetY;
 
             //オブジェクト作成
-            Instantiate(enemy,spawnPos,Quaternion.identity);
+            Instantiate(enemyPrefab,spawnPos,Quaternion.identity);
         }
+    }
+
+    
+
+    void Awake()
+    {
+        rend = GetComponent<Renderer>();
+        if (rend != null)
+            originalColor = rend.material.color;
     }
 
     void Start()
     {
         EnemySpawns();
+            if (enemyPrefab.GetComponent<EnemyMove>() == null)
+            {
+                //上下移動スクリプト追加
+                enemyPrefab.AddComponent<EnemyMove>();
+            }
     }
+
+    
 }

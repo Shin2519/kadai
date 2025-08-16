@@ -493,12 +493,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1460236953}
-  enemy: {fileID: 6941770305490209167, guid: 57b675a6c0604184ab7d155f42c16c28, type: 3}
-  minDistance: 10
-  maxDistance: 20
+  enemyPrefab: {fileID: 6941770305490209167, guid: 57b675a6c0604184ab7d155f42c16c28, type: 3}
+  minDistance: 20
+  maxDistance: 40
   width: 40
-  height: 10
-  spawnCount: 10
+  height: 20
+  spawnCount: 24
+  rend: {fileID: 0}
 --- !u!4 &1195035077
 Transform:
   m_ObjectHideFlags: 0
@@ -610,6 +611,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1460236953}
   - component: {fileID: 1460236952}
+  - component: {fileID: 1460236954}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -650,6 +652,22 @@ Transform:
   - {fileID: 330585546}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1460236954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460236951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cacc7790c2eda9d44985ae85b2188df8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockOnRange: 20
+  frontAngle: 60
+  maxLockOnTargets: 8
+  lockedTargets: []
 --- !u!1 &1910767692
 GameObject:
   m_ObjectHideFlags: 0
