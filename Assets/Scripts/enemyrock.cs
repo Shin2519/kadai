@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class enemyrock : MonoBehaviour
 {
-    public float lockOnRange = 20f;
-    public float frontAngle = 60f;
+    public float lockOnRange = 1000f;
+    public float frontAngle = 70f;
     public int maxLockOnTargets = 8;
 
     public List<Transform> lockedTargets = new List<Transform>();
@@ -13,8 +13,15 @@ public class enemyrock : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKey(KeyCode.Z))
             FindLockOnTargets();
+
+        if(Input.GetKeyUp(KeyCode.Z))
+        {
+            // 前回のロックオン色をリセット
+            foreach (EnemyMove e in previousLocked)
+                e.ResetColor();
+        }
     }
     //Enemy色変化
     void FindLockOnTargets()

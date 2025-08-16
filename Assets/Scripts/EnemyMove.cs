@@ -18,7 +18,7 @@ public class EnemyMove : MonoBehaviour
     //enemyF‚Ì•Ï‰»
     void Awake()
     {
-        rend = GetComponent<Renderer>();
+        rend = GetComponentInChildren<Renderer>();
         if (rend != null)
         {
             originalColor = rend.material.color;
