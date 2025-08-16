@@ -29,6 +29,11 @@ public class HomingBullet : MonoBehaviour
             float dist = Vector3.Distance(transform.position, target.position);
             if(dist < hitDistance)
             {
+                EnemyMove e =target.GetComponent<EnemyMove>();
+                if (e != null) 
+                {
+                    e.OnHit();
+                }
                 Destroy(gameObject);
                 return;
             }

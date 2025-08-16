@@ -667,6 +667,8 @@ MonoBehaviour:
   lockOnRange: 20
   frontAngle: 60
   maxLockOnTargets: 8
+  bulletPrefab: {fileID: 7339563512495538959, guid: b83f0d9546bbebc47a4af84f25f8b114, type: 3}
+  firePoint: {fileID: 1460236953}
   lockedTargets: []
 --- !u!1 &1910767692
 GameObject:

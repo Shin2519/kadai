@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class EnemyMove : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class EnemyMove : MonoBehaviour
 
     [HideInInspector] public Renderer rend;
     private Color originalColor;
+    private Vector3 originalpos;
+    private Coroutine hitRoutine;
 
     //enemy色の変化
     void Awake()
@@ -61,5 +64,47 @@ public class EnemyMove : MonoBehaviour
     {
         if (rend != null)
             rend.material.color = Color.red;
+    }
+
+    public void OnHit()
+    {
+        if(hitRoutine != null)
+        {
+            StopCoroutine(hitRoutine);
+        }
+        hitRoutine = StartCoroutine(HitEffect());
+    }
+
+    private IEnumerator HitEffect()
+    {
+        originalpos = transform.position;
+
+        //色を黄色に変更
+        if (rend != null)
+        {
+            rend.material.color = Color.yellow;
+        }
+
+        float duration = 0.3f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            //ランダムに少し揺らす
+            float shakeAmout = 0.05f;
+            Vector3 offset = new Vector3(Mathf.Sin(Time.time * 50f) * shakeAmout, Mathf.Cos(Time.time * 60f) * shakeAmout, 0);
+            transform.position = originalpos + offset;
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        //元に戻す
+        transform.position = originalpos;
+        if(rend != null)
+        {
+            rend.material.color = originalColor;
+        }
+
+        hitRoutine = null;
+        
     }
 }
